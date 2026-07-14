@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guglielmo Puzio — Legal Engineer</title>
+<meta name="description" content="Lawyer and engineer in Rome. I build open-source tools that make Italian law computable: MCP tooling for Claude, legal NLP, knowledge graphs.">
+<meta property="og:title" content="Guglielmo Puzio — Legal Engineer">
+<meta property="og:description" content="I build tools that make Italian law computable.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://capazme.github.io/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-family='Georgia,serif'>§</text></svg>">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Guglielmo Puzio",
+"alternateName":"capazme","jobTitle":"Legal Engineer","url":"https://capazme.github.io/",
+"alumniOf":"LUISS Guido Carli","address":{"@type":"PostalAddress","addressLocality":"Rome","addressCountry":"IT"},
+"sameAs":["https://github.com/capazme","https://www.linkedin.com/in/guglielmo-puzio","https://orcid.org/0009-0001-4366-2632"]}
+</script>
+<style>
+  :root {
+    --paper: #faf9f6;
+    --ink: #191a1c;
+    --muted: #5c5f66;
+    --line: #dcd9d2;
+    --accent: #24456e;
+    --accent-soft: #eef2f7;
+    --gold: #9a7b3f;
+    --net: 36, 69, 110;
+    --gold-rgb: 154, 123, 63;
+    --header-bg: rgba(250, 249, 246, .8);
+    --card: #ffffff;
+    --grain-a: .04;
+    /* project hues */
+    --p1: 52, 120, 246;   /* mcp — blue */
+    --p2: 20, 158, 140;   /* VisuaLex — teal */
+    --p3: 138, 92, 214;   /* ALIS/MERL-T — violet */
+    --p4: 210, 140, 40;   /* axeScraper — amber */
+    --green: 26, 168, 127;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #0d0e11;
+      --ink: #e8e6e1;
+      --muted: #9a9da6;
+      --line: #26282e;
+      --accent: #8fb4e3;
+      --accent-soft: #161d29;
+      --gold: #c8a45e;
+      --net: 143, 180, 227;
+      --gold-rgb: 200, 164, 94;
+      --header-bg: rgba(13, 14, 17, .78);
+      --card: #14161a;
+      --grain-a: .06;
+      --p1: 96, 150, 255;
+      --p2: 45, 194, 172;
+      --p3: 170, 128, 240;
+      --p4: 232, 168, 76;
+      --green: 55, 200, 150;
+    }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body.cc, body.cc a, body.cc button { cursor: none; }
+  h1, h2, h3, .brand, .serif { font-family: Georgia, "Times New Roman", serif; font-weight: 400; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  /* ---------- aurora backdrop ---------- */
+  body::before {
+    content: ""; position: fixed; inset: -30%; z-index: -2; pointer-events: none;
+    background:
+      radial-gradient(38% 32% at 22% 26%, rgba(var(--p1), .13), transparent 60%),
+      radial-gradient(34% 30% at 82% 42%, rgba(var(--p3), .12), transparent 62%),
+      radial-gradient(40% 34% at 60% 82%, rgba(var(--p2), .1), transparent 62%),
+      radial-gradient(30% 26% at 12% 78%, rgba(var(--gold-rgb), .09), transparent 62%);
+    animation: aurora 26s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    from { transform: translate3d(-2%, -1%, 0) rotate(-1.4deg) scale(1); }
+    to   { transform: translate3d(3%, 2%, 0) rotate(1.4deg) scale(1.08); }
+  }
+
+  /* ---------- film grain ---------- */
+  #grain {
+    position: fixed; inset: -100px; z-index: 80; pointer-events: none;
+    opacity: var(--grain-a);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 900ms steps(6) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0,0) } 20% { transform: translate(-32px,18px) }
+    40% { transform: translate(24px,-28px) } 60% { transform: translate(-18px,-34px) }
+    80% { transform: translate(30px,26px) } 100% { transform: translate(0,0) }
+  }
+
+  /* ---------- custom cursor ---------- */
+  #cur, #curRing { position: fixed; top: 0; left: 0; z-index: 100; pointer-events: none; will-change: transform; display: none; }
+  body.cc #cur, body.cc #curRing { display: block; }
+  #cur { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin: -3px 0 0 -3px; }
+  #curRing {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid rgba(var(--net), .7); margin: -17px 0 0 -17px;
+    transition: width .25s, height .25s, margin .25s, border-color .25s, background .25s;
+  }
+  body.cc.cur-hover #curRing {
+    width: 56px; height: 56px; margin: -28px 0 0 -28px;
+    border-color: var(--gold); background: rgba(var(--gold-rgb), .08);
+  }
+  body.cc.cur-drag #curRing { border-style: dashed; border-color: var(--gold); }
+
+  /* ---------- preloader ---------- */
+  #intro {
+    position: fixed; inset: 0; z-index: 99;
+    display: grid; place-items: center;
+    background: var(--paper);
+    transition: clip-path .65s cubic-bezier(.76, 0, .24, 1);
+    clip-path: inset(0 0 0 0);
+    animation: introSafety .1s linear 3.2s forwards;
+  }
+  #intro.done { clip-path: inset(0 0 100% 0); }
+  @keyframes introSafety { to { visibility: hidden; } }
+  #intro .sig {
+    font-family: Georgia, serif; font-size: clamp(5rem, 14vw, 9rem); line-height: 1;
+    background: linear-gradient(120deg, var(--accent), rgb(var(--p3)) 55%, var(--gold));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: sigIn .8s cubic-bezier(.16,1,.3,1) both;
+  }
+  #intro .pct {
+    position: absolute; right: 2rem; bottom: 1.6rem;
+    font-family: Georgia, serif; font-size: 2.6rem; color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  #intro .pct small { font-size: 1.1rem; color: var(--gold); }
+  #intro .lbl {
+    position: absolute; left: 2rem; bottom: 2.2rem;
+    font-size: .72rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted);
+  }
+  @keyframes sigIn { from { opacity: 0; transform: scale(.7) translateY(16px); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+  /* ---------- scroll progress ---------- */
+  #progress {
+    position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60;
+    background: linear-gradient(90deg, rgb(var(--p1)), rgb(var(--p3)) 50%, var(--gold));
+    transform-origin: 0 50%; transform: scaleX(0);
+  }
+  @supports (animation-timeline: scroll()) {
+    #progress { animation: growX linear both; animation-timeline: scroll(); }
+    @keyframes growX { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+  }
+
+  /* ---------- header ---------- */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    transition: background .3s, border-color .3s, transform .45s cubic-bezier(.16,1,.3,1);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled { background: var(--header-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom-color: var(--line); }
+  header.hidden { transform: translateY(-110%); }
+  .header-inner { display: flex; justify-content: space-between; align-items: baseline; padding-top: 1.05rem; padding-bottom: 1.05rem; }
+  .brand { font-size: 1.12rem; color: var(--ink); white-space: nowrap; }
+  .brand .sign { color: var(--accent); margin-right: .45rem; display: inline-block; transition: transform .55s cubic-bezier(.34,1.56,.64,1); }
+  .brand:hover .sign { transform: rotate(180deg); }
+  .brand:hover { text-decoration: none; }
+  nav { display: flex; gap: 1.35rem; font-size: .9rem; }
+  nav a { color: var(--muted); position: relative; transition: color .25s; }
+  nav a::after { content: ""; position: absolute; left: 0; bottom: -3px; height: 1px; width: 0; background: linear-gradient(90deg, var(--accent), var(--gold)); transition: width .3s; }
+  nav a:hover { color: var(--accent); text-decoration: none; }
+  nav a:hover::after { width: 100%; }
+  @media (max-width: 560px) {
+    nav { gap: .9rem; }
+    nav a:nth-child(2), nav a:nth-child(3), nav a:nth-child(4) { display: none; }
+    .brand { font-size: 1rem; }
+  }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; min-height: 100svh; display: flex; align-items: center; perspective: 1100px; }
+  .hero::after {
+    content: ""; position: absolute; z-index: 0; right: -6%; top: 10%;
+    width: 56%; height: 74%; pointer-events: none;
+    background: radial-gradient(circle at 58% 42%, rgba(var(--p3), .18), rgba(var(--p1), .12) 42%, transparent 70%);
+    filter: blur(26px);
+    animation: blob 15s ease-in-out infinite alternate;
+  }
+  @keyframes blob { from { transform: translateY(-12px) scale(1); } to { transform: translateY(16px) scale(1.1); } }
+  @media (max-width: 700px) { .hero::after { opacity: .5; } }
+  #scene3d {
+    position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; touch-action: pan-y;
+    -webkit-mask-image: radial-gradient(130% 110% at 32% 42%, #000 34%, transparent 80%);
+            mask-image: radial-gradient(130% 110% at 32% 42%, #000 34%, transparent 80%);
+  }
+  .hero .wrap { position: relative; z-index: 1; padding-top: 3rem; pointer-events: none; }
+  .hero .wrap a { pointer-events: auto; }
+  .kicker { font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+  .kicker .dot { color: var(--gold); }
+  h1 { font-size: clamp(2.3rem, 7vw, 4.4rem); line-height: 1.1; letter-spacing: -.015em; max-width: 46rem; transform-style: preserve-3d; }
+  h1 .w {
+    display: inline-block; opacity: 0; transform: rotateX(78deg) translateY(.85em); filter: blur(7px);
+    animation: wordIn 1.05s cubic-bezier(.16,1,.3,1) forwards; animation-delay: calc(1.5s + var(--i) * .075s);
+  }
+  @keyframes wordIn { to { opacity: 1; transform: none; filter: none; } }
+  h1 .computable, h1 .computable #scramble {
+    font-style: italic;
+    background: linear-gradient(100deg, rgb(var(--p1)), rgb(var(--p3)) 42%, var(--gold) 78%, rgb(var(--p1)));
+    background-size: 260% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: hueflow 8s ease-in-out infinite;
+  }
+  @keyframes hueflow { 0%,100% { background-position: 0% 50% } 50% { background-position: 100% 50% } }
+  .hero p.sub { margin-top: 1.8rem; color: var(--muted); max-width: 37rem; }
+  .hero p.sub strong { color: var(--ink); font-weight: 600; }
+  .hero-links { margin-top: 2.4rem; display: flex; gap: .9rem; flex-wrap: wrap; }
+  .hero-links a { pointer-events: auto; }
+  .btn {
+    display: inline-block; padding: .62rem 1.2rem; border: 1px solid var(--accent); border-radius: 2px;
+    font-size: .92rem; color: var(--accent); position: relative; overflow: hidden;
+    transition: color .3s, transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; will-change: transform;
+  }
+  .btn::before { content: ""; position: absolute; inset: 0; background: var(--accent); transform: translateY(101%); transition: transform .34s cubic-bezier(.76,0,.24,1); z-index: -1; }
+  .btn:hover { color: var(--paper); text-decoration: none; box-shadow: 0 10px 28px rgba(0,0,0,.18); }
+  .btn:hover::before { transform: translateY(0); }
+  .btn.solid { background: var(--accent); color: var(--paper); }
+  .btn.solid::before { background: var(--gold); }
+  .hero .fx { opacity: 0; animation: fadeUp 1s cubic-bezier(.16,1,.3,1) forwards; }
+  .hero .fx1 { animation-delay: 1.4s; } .hero .fx2 { animation-delay: 2.25s; } .hero .fx3 { animation-delay: 2.5s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+  .scroll-cue { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 1.2rem; z-index: 1; animation: cue 2.2s ease-in-out infinite; }
+  @keyframes cue { 0%,100% { transform: translate(-50%,0); opacity:.5 } 50% { transform: translate(-50%,9px); opacity:1 } }
+  .drag-hint { position: absolute; right: 2rem; bottom: 1.6rem; z-index: 1; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); opacity: 0; animation: fadeUp 1s ease 3s forwards; }
+  @media (max-width: 700px) { .drag-hint { display: none; } }
+
+  /* ---------- stats ---------- */
+  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); perspective: 900px; }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding-top: 2.2rem; padding-bottom: 2.2rem; text-align: center; }
+  @media (max-width: 640px) { .stats-inner { grid-template-columns: repeat(2, 1fr); row-gap: 1.9rem; } }
+  .stat .n { font-family: Georgia, serif; font-size: 2rem; color: rgb(var(--h)); font-variant-numeric: tabular-nums; }
+  .stat .n .suffix { color: var(--gold); }
+  .stat .l { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: .25rem; }
+
+  /* ---------- marquee ---------- */
+  .marquee { overflow: hidden; border-bottom: 1px solid var(--line); padding: 1.6rem 0; user-select: none; }
+  .marquee .track {
+    display: flex; gap: 3.2rem; width: max-content; animation: mq 30s linear infinite;
+    font-family: Georgia, serif; font-style: italic; font-size: clamp(1.6rem, 3.4vw, 2.6rem);
+    color: transparent; -webkit-text-stroke: 1px rgba(var(--net), .5); white-space: nowrap;
+  }
+  .marquee:hover .track { animation-play-state: paused; }
+  .marquee .track em { font-style: normal; -webkit-text-stroke: 0; color: var(--gold); font-size: .55em; align-self: center; }
+  @keyframes mq { to { transform: translateX(-50%); } }
+
+  /* ---------- sections ---------- */
+  section { padding: 5rem 0; perspective: 1200px; }
+  section + section { border-top: 1px solid var(--line); }
+  h2 { font-size: 1.65rem; margin-bottom: 2.6rem; }
+  h2 .mask { display: inline-block; clip-path: inset(0 0 110% 0); transition: clip-path 1s cubic-bezier(.16,1,.3,1) .1s; }
+  .in h2 .mask, h2.in .mask { clip-path: inset(0 0 -10% 0); }
+  h2::after { content: ""; display: block; width: 2.4rem; height: 2px; background: linear-gradient(90deg, var(--accent), var(--gold)); margin-top: .8rem; transform-origin: 0 50%; transform: scaleX(0); transition: transform .9s cubic-bezier(.16,1,.3,1) .3s; }
+  .in h2::after, h2.in::after { transform: scaleX(1); }
+  .lede { color: var(--muted); max-width: 37rem; margin: -1.6rem 0 2.6rem; }
+
+  /* ---------- work: cards with generative covers ---------- */
+  .entry {
+    position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 8px;
+    background: var(--card); transform-style: preserve-3d;
+    transition: transform .3s, box-shadow .3s, border-color .3s; will-change: transform;
+  }
+  .entry + .entry { margin-top: 1.7rem; }
+  .entry::after {
+    content: ""; position: absolute; inset: 0; border-radius: 8px;
+    background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(var(--h), .12), transparent 60%);
+    opacity: 0; transition: opacity .3s; pointer-events: none;
+  }
+  .entry:hover { box-shadow: 0 20px 44px rgba(0,0,0,.16); border-color: rgba(var(--h), .5); }
+  .entry:hover::after { opacity: 1; }
+  .cover {
+    position: relative; height: 150px; color: rgb(var(--h));
+    background: linear-gradient(120deg, rgba(var(--h), .17), rgba(var(--h), .03) 70%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .cover svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .body { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1.2rem; padding: 1.5rem 1.5rem 1.6rem; transform: translateZ(20px); }
+  .body .num { font-family: Georgia, serif; font-size: 1.05rem; color: rgb(var(--h)); padding-top: .28rem; }
+  .entry h3 { font-size: 1.3rem; margin-bottom: .55rem; }
+  .entry h3 a { color: var(--ink); background: linear-gradient(90deg, rgb(var(--h)), var(--gold)) no-repeat 0 100% / 0 1px; transition: background-size .35s; }
+  .entry h3 a:hover { color: rgb(var(--h)); text-decoration: none; background-size: 100% 1px; }
+  .entry p { color: var(--muted); font-size: .98rem; max-width: 40rem; }
+  .entry p strong { color: var(--ink); font-weight: 600; }
+  .meta { margin-top: .95rem; font-size: .8rem; letter-spacing: .04em; color: var(--muted); display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+  .meta .tag { background: rgba(var(--h), .12); color: rgb(var(--h)); padding: .14rem .55rem; border-radius: 2px; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+  .meta .tag:hover { transform: translateY(-2px) rotate(-1deg); }
+  /* cover animations */
+  .cover .lk path { stroke-dasharray: 5 7; animation: flow 1.4s linear infinite; }
+  @keyframes flow { to { stroke-dashoffset: -24; } }
+  .cover .sweep { transform-box: view-box; animation: sweep 3.4s ease-in-out infinite; }
+  @keyframes sweep { 0% { transform: translateX(30px); opacity: 0 } 20% { opacity: .6 } 80% { opacity: .6 } 100% { transform: translateX(300px); opacity: 0 } }
+  .cover .scan { transform-box: view-box; animation: scan 2.6s ease-in-out infinite alternate; }
+  @keyframes scan { from { transform: translateY(0) } to { transform: translateY(70px) } }
+  .cover .chk { transform-box: fill-box; transform-origin: center; animation: pop 2.4s ease-in-out infinite; }
+  @keyframes pop { 0%,70%,100% { transform: scale(1) } 82% { transform: scale(1.16) } }
+
+  /* ---------- journey ---------- */
+  .timeline { position: relative; margin-left: .4rem; padding-left: 2rem; }
+  .timeline::before { content: ""; position: absolute; left: 0; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+  .timeline .progressline { position: absolute; left: 0; top: 6px; width: 2px; height: calc(100% - 12px); background: linear-gradient(var(--p1-c, rgb(var(--p1))), rgb(var(--p3)) 50%, var(--gold)); transform-origin: top; transform: scaleY(0); }
+  .step { position: relative; padding: 0 0 2.4rem; }
+  .step:last-child { padding-bottom: 0; }
+  .step::before {
+    content: ""; position: absolute; left: calc(-2rem - 5px); top: 8px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--paper); border: 2px solid rgb(var(--sc, var(--net))); transition: background .3s, transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
+  }
+  .step:hover::before { background: rgb(var(--sc, var(--net))); transform: scale(1.35); box-shadow: 0 0 0 7px rgba(var(--sc, var(--net)), .15); }
+  .step .when { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: .3rem; }
+  .step h3 { font-size: 1.15rem; margin-bottom: .35rem; }
+  .step p { color: var(--muted); font-size: .96rem; max-width: 35rem; }
+  .step p em { color: var(--ink); font-style: italic; }
+
+  /* ---------- research ---------- */
+  .note { position: relative; overflow: hidden; background: var(--accent-soft); border-left: 3px solid var(--accent); padding: 1.8rem 2rem; font-size: .99rem; border-radius: 0 4px 4px 0; transform-style: preserve-3d; will-change: transform; --h: var(--p3); }
+  .note .bigsign { position: absolute; right: -1.4rem; bottom: -3.4rem; font-family: Georgia, serif; font-size: 12rem; line-height: 1; color: rgb(var(--p3)); opacity: .1; pointer-events: none; animation: drift 16s ease-in-out infinite; }
+  @keyframes drift { 0%,100% { transform: rotate(-7deg) } 50% { transform: rotate(6deg) translateY(-10px) } }
+  .note strong.t { font-family: Georgia, serif; font-weight: 400; font-style: italic; font-size: 1.12rem; }
+  .note .links { margin-top: 1.15rem; display: flex; gap: 1.4rem; flex-wrap: wrap; }
+  .note .links a { transition: transform .25s; display: inline-block; }
+  .note .links a:hover { transform: translateX(4px); }
+
+  /* ---------- about ---------- */
+  .about p + p { margin-top: 1.15rem; }
+  .about p strong { font-weight: 600; }
+  .langs { margin-top: 2.1rem; display: flex; gap: .6rem; flex-wrap: wrap; font-size: .85rem; }
+  .langs span { border: 1px solid var(--line); padding: .3rem .85rem; border-radius: 999px; color: var(--muted); transition: border-color .3s, color .3s, transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s; }
+  .langs span:hover { border-color: var(--gold); color: var(--ink); transform: translateY(-4px) rotate(1deg); box-shadow: 0 8px 18px rgba(0,0,0,.12); }
+  .fact-line { margin-top: 2rem; font-size: .9rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 1.2rem; }
+
+  /* ---------- contact ---------- */
+  .contact p { max-width: 34rem; }
+  .contact .hero-links { margin-top: 1.9rem; }
+  .alt-links { margin-top: 1.4rem; font-size: .9rem; color: var(--muted); display: flex; gap: 1.3rem; flex-wrap: wrap; }
+
+  /* ---------- reveal system ---------- */
+  .reveal { opacity: 0; transform: perspective(1000px) rotateX(9deg) translateY(44px); transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); transition-delay: var(--d, 0s); will-change: transform, opacity; }
+  .reveal.from-left { transform: perspective(1000px) rotateY(-7deg) translateX(-44px); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    #intro, #grain, #cur, #curRing { display: none !important; }
+    body::before, .hero::after { animation: none; }
+    .reveal, .hero .fx, h1 .w { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; animation: none !important; }
+    .scroll-cue, .note .bigsign, .drag-hint, .marquee .track, .cover * { animation: none !important; }
+    h1 .computable, h1 .computable #scramble { animation: none; }
+    .timeline .progressline { transform: scaleY(1); }
+    h2 .mask { clip-path: none; transition: none; }
+    h2::after { transform: scaleX(1); transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <span class="sig">§</span>
+  <span class="lbl">Guglielmo Puzio · Legal Engineer</span>
+  <span class="pct"><span id="pctN">0</span><small>%</small></span>
+</div>
+<div id="progress" aria-hidden="true"></div>
+<div id="grain" aria-hidden="true"></div>
+<div id="cur" aria-hidden="true"></div>
+<div id="curRing" aria-hidden="true"></div>
+
+<header id="hd">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top"><span class="sign">§</span>Guglielmo Puzio</a>
+    <nav>
+      <a href="#work">Work</a>
+      <a href="#journey">Journey</a>
+      <a href="#research">Research</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero" id="hero">
+    <canvas id="scene3d" aria-hidden="true"></canvas>
+    <div class="wrap" id="heroWrap">
+      <p class="kicker fx fx1">Legal engineer <span class="dot">·</span> Rome, Italy</p>
+      <h1 aria-label="I build tools that make Italian law computable.">
+        <span class="w" style="--i:0">I</span>
+        <span class="w" style="--i:1">build</span>
+        <span class="w" style="--i:2">tools</span>
+        <span class="w" style="--i:3">that</span>
+        <span class="w" style="--i:4">make</span>
+        <span class="w" style="--i:5">Italian</span>
+        <span class="w" style="--i:6">law</span>
+        <span class="w computable" style="--i:7"><span id="scramble">computable</span>.</span>
+      </h1>
+      <p class="sub fx fx2">Lawyer by training, engineer by obsession. Law degree from
+      <strong>LUISS</strong> (Law &amp; Innovation), code forged at <strong>42 Roma</strong>,
+      now a trainee lawyer (<i>praticante avvocato</i>) at a Rome firm — shipping open-source
+      legal tools the whole way.</p>
+      <div class="hero-links fx fx3">
+        <a class="btn solid" data-magnet href="mailto:g.puzio@sapglegal.com">Email me</a>
+        <a class="btn" data-magnet href="https://github.com/capazme">GitHub — @capazme</a>
+        <a class="btn" data-magnet href="https://www.linkedin.com/in/guglielmo-puzio">LinkedIn</a>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true">↓</div>
+    <div class="drag-hint" aria-hidden="true">Drag the graph</div>
+  </div>
+
+  <div class="stats">
+    <div class="wrap stats-inner">
+      <div class="stat reveal" style="--h:var(--p1)"><div class="n"><span data-count="200">200</span><span class="suffix">+</span></div><div class="l">legal tools shipped</div></div>
+      <div class="stat reveal" style="--h:var(--p2); --d:.09s"><div class="n"><span data-count="7">7</span><span class="suffix">+</span></div><div class="l">verified legal sources</div></div>
+      <div class="stat reveal" style="--h:var(--p3); --d:.18s"><div class="n"><span data-count="16">16</span></div><div class="l">open-source repos</div></div>
+      <div class="stat reveal" style="--h:var(--p4); --d:.27s"><div class="n"><span data-count="3">3</span><span class="suffix">+py</span></div><div class="l">working languages</div></div>
+    </div>
+  </div>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <span>Normattiva</span><em>§</em><span>Cassazione</span><em>§</em><span>GDPR</span><em>§</em>
+      <span>Model Context Protocol</span><em>§</em><span>art. 12 preleggi</span><em>§</em>
+      <span>embeddings</span><em>§</em><span>EUR-Lex</span><em>§</em><span>knowledge graphs</span><em>§</em>
+      <span>Normattiva</span><em>§</em><span>Cassazione</span><em>§</em><span>GDPR</span><em>§</em>
+      <span>Model Context Protocol</span><em>§</em><span>art. 12 preleggi</span><em>§</em>
+      <span>embeddings</span><em>§</em><span>EUR-Lex</span><em>§</em><span>knowledge graphs</span><em>§</em>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <h2 class="reveal"><span class="mask">Selected work</span></h2>
+      <p class="lede reveal">Every project starts from the same itch: a legal task that deserves
+      better tooling than copy-paste and blind trust.</p>
+
+      <article class="entry reveal" data-tilt style="--h:var(--p1)">
+        <div class="cover">
+          <svg viewBox="0 0 480 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g class="lk" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".7">
+              <path d="M150 40 C 240 40 250 75 330 75"/>
+              <path d="M150 75 H 330"/>
+              <path d="M150 110 C 240 110 250 75 330 75"/>
+            </g>
+            <g fill="none" stroke="currentColor" stroke-width="1.3" opacity=".8">
+              <rect x="34" y="28" width="108" height="24" rx="12"/>
+              <rect x="34" y="63" width="108" height="24" rx="12"/>
+              <rect x="34" y="98" width="108" height="24" rx="12"/>
+            </g>
+            <g fill="currentColor" opacity=".85" font-family="Georgia, serif" font-size="14">
+              <text x="46" y="45">§</text><text x="46" y="80">§</text><text x="46" y="115">§</text>
+            </g>
+            <text x="62" y="45" fill="currentColor" font-family="-apple-system,sans-serif" font-size="10" opacity=".7" letter-spacing=".5">Normattiva</text>
+            <text x="62" y="80" fill="currentColor" font-family="-apple-system,sans-serif" font-size="10" opacity=".7" letter-spacing=".5">Italgiure</text>
+            <text x="62" y="115" fill="currentColor" font-family="-apple-system,sans-serif" font-size="10" opacity=".7" letter-spacing=".5">EUR-Lex</text>
+            <rect x="330" y="52" width="98" height="46" rx="10" fill="rgba(52,120,246,.16)" stroke="currentColor" stroke-width="1.6"/>
+            <text x="379" y="80" text-anchor="middle" fill="currentColor" font-family="-apple-system,sans-serif" font-size="12" letter-spacing="1.5">CLAUDE</text>
+            <g transform="translate(420,50)"><g class="chk">
+              <circle r="12" fill="var(--paper)" stroke="rgb(var(--green))" stroke-width="2"/>
+              <path d="M-5 0 L-1 4 L6 -5" fill="none" stroke="rgb(var(--green))" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </g></g>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="num">01</div>
+          <div>
+            <h3><a href="https://github.com/capazme/mcp-legal-it">mcp-legal-it</a></h3>
+            <p><strong>The problem:</strong> large language models are eloquent about the law and
+            frequently wrong about it. <strong>The tool:</strong> an MCP server that grounds Claude
+            in verified Italian sources — statutes from Normattiva, case law from Italgiure and
+            CeRDEF, EU law from EUR-Lex — plus 200+ deterministic tools for the work lawyers
+            actually bill hours for: interest and revaluation, fee schedules, procedural deadlines,
+            GDPR paperwork. Guardrail hooks verify that every cited norm is backed by a real
+            source lookup.</p>
+            <div class="meta">
+              <span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Apache-2.0</span>
+              <span>CI · versioned releases · 20 skills · 6 agents</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry reveal" data-tilt style="--h:var(--p2)">
+        <div class="cover">
+          <svg viewBox="0 0 480 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g fill="none" stroke="currentColor" stroke-width="1.5" opacity=".5">
+              <path d="M30 42 q 18 -12 36 0 t 36 0 t 36 0"/>
+              <path d="M30 64 q 18 11 36 0 t 36 0 t 36 0"/>
+              <path d="M30 86 q 18 -11 36 0 t 36 0 t 36 0"/>
+              <path d="M30 108 q 18 12 36 0 t 36 0 t 36 0"/>
+            </g>
+            <g stroke="currentColor" stroke-width="1.7" fill="none" opacity=".8">
+              <path d="M210 75 H 258"/><path d="M250 68 L 258 75 L 250 82"/>
+            </g>
+            <g opacity=".9">
+              <rect x="296" y="36" width="150" height="15" rx="3" fill="rgba(20,158,140,.2)" stroke="currentColor" stroke-width="1"/>
+              <rect x="296" y="60" width="118" height="15" rx="3" fill="rgba(20,158,140,.15)" stroke="currentColor" stroke-width="1"/>
+              <rect x="296" y="84" width="140" height="15" rx="3" fill="rgba(20,158,140,.15)" stroke="currentColor" stroke-width="1"/>
+              <rect x="296" y="108" width="98" height="15" rx="3" fill="rgba(20,158,140,.1)" stroke="currentColor" stroke-width="1"/>
+            </g>
+            <line class="sweep" x1="0" y1="20" x2="0" y2="130" stroke="currentColor" stroke-width="2" opacity=".55"/>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="num">02</div>
+          <div>
+            <h3><a href="https://github.com/capazme/VisuaLexAPI">VisuaLex</a></h3>
+            <p><strong>The problem:</strong> legal research means walls of unstructured text.
+            <strong>The tool:</strong> a research workbench for Italian and EU sources — an async
+            Python API over Normattiva, EUR-Lex and Brocardi with a React frontend that turns
+            statutes into structured, navigable views. Started as a Colab notebook in 2023;
+            now on its fourth architecture.</p>
+            <div class="meta">
+              <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">React</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry reveal" data-tilt style="--h:var(--p3)">
+        <div class="cover">
+          <svg viewBox="0 0 480 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <g class="lk" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".6">
+              <path d="M78 36 L 220 75"/><path d="M78 114 L 220 75"/>
+              <path d="M158 24 L 220 75"/><path d="M158 126 L 220 75"/>
+            </g>
+            <g fill="none" stroke="currentColor" stroke-width="1.4" opacity=".9">
+              <circle cx="78" cy="36" r="16"/><circle cx="78" cy="114" r="16"/>
+              <circle cx="158" cy="24" r="16"/><circle cx="158" cy="126" r="16"/>
+            </g>
+            <g fill="currentColor" font-family="Georgia,serif" font-size="14" text-anchor="middle" opacity=".95">
+              <text x="78" y="41">L</text><text x="78" y="119">P</text>
+              <text x="158" y="29">S</text><text x="158" y="131">T</text>
+            </g>
+            <rect x="220" y="55" width="40" height="40" transform="rotate(45 240 75)" fill="rgba(138,92,214,.2)" stroke="currentColor" stroke-width="1.6"/>
+            <g stroke="currentColor" stroke-width="1.7" fill="none" opacity=".8">
+              <path d="M276 75 H 430"/><path d="M422 68 L 430 75 L 422 82"/>
+            </g>
+            <text x="353" y="66" text-anchor="middle" fill="currentColor" font-family="-apple-system,sans-serif" font-size="10" opacity=".75" letter-spacing=".5">interpretation</text>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="num">03</div>
+          <div>
+            <h3><a href="https://github.com/capazme/ALIS_CORE">ALIS / MERL-T</a></h3>
+            <p><strong>The question:</strong> can interpretation itself be engineered? An experiment
+            in computational hermeneutics: the letter and the legislator's intent codified in
+            art. 12 of the Italian <i>preleggi</i>, the system around a norm, the case law that
+            applies it — each implemented as an expert in a multi-expert retrieval architecture,
+            aligned through community feedback (RLCF).</p>
+            <div class="meta">
+              <span class="tag">Python</span><span class="tag">FastAPI</span>
+              <span>Research prototype</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="entry reveal" data-tilt style="--h:var(--p4)">
+        <div class="cover">
+          <svg viewBox="0 0 480 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <rect x="70" y="24" width="340" height="102" rx="8" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7"/>
+            <line x1="70" y1="46" x2="410" y2="46" stroke="currentColor" stroke-width="1.2" opacity=".5"/>
+            <g fill="currentColor" opacity=".7"><circle cx="84" cy="35" r="3"/><circle cx="96" cy="35" r="3"/><circle cx="108" cy="35" r="3"/></g>
+            <g fill="none" stroke="currentColor" stroke-width="1.2" opacity=".4">
+              <line x1="90" y1="64" x2="300" y2="64"/><line x1="90" y1="82" x2="350" y2="82"/>
+              <line x1="90" y1="100" x2="260" y2="100"/><line x1="90" y1="115" x2="320" y2="115"/>
+            </g>
+            <rect class="scan" x="70" y="46" width="340" height="2.5" fill="currentColor" opacity=".95"/>
+            <g><circle cx="384" cy="64" r="5" fill="rgb(var(--green))"/><circle cx="384" cy="82" r="5" fill="currentColor"/><circle cx="384" cy="100" r="5" fill="rgb(var(--green))"/><circle cx="384" cy="115" r="5" fill="rgb(var(--green))"/></g>
+          </svg>
+        </div>
+        <div class="body">
+          <div class="num">04</div>
+          <div>
+            <h3><a href="https://github.com/capazme/axeScraper">axeScraper</a></h3>
+            <p><strong>The problem:</strong> accessibility compliance is audited one page at a time.
+            <strong>The tool:</strong> a crawler and axe-core pipeline for large-scale web
+            accessibility audits — the tooling side of WCAG and European Accessibility Act
+            compliance. (This site respects <code>prefers-reduced-motion</code>. Naturally.)</p>
+            <div class="meta">
+              <span class="tag">Python</span><span class="tag">a11y</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="wrap">
+      <h2 class="reveal"><span class="mask">The journey</span></h2>
+      <p class="lede reveal">From parsing Latin to parsing statutes — the long way round.</p>
+      <div class="timeline">
+        <div class="progressline" aria-hidden="true"></div>
+
+        <div class="step reveal from-left" style="--sc:var(--p1)">
+          <div class="when">2016 – 2021 · Naples &amp; Lahti</div>
+          <h3>Classics first</h3>
+          <p><em>Liceo Classico Europeo</em> (EsaBac dual diploma) with an exchange year
+          in Finland. Latin, Greek, French, English: years of parsing dense texts in dead and
+          living languages — unknowingly, the best possible training for statutes and source code.</p>
+        </div>
+
+        <div class="step reveal from-left" style="--sc:var(--p2)">
+          <div class="when">2021 · Rome</div>
+          <h3>Law at LUISS, code at 42</h3>
+          <p>Enrolled in law at <em>LUISS Guido Carli</em>, Law &amp; Innovation track — and two
+          months later walked into the <em>42 Roma Luiss</em> piscine: no teachers, no lectures,
+          just problems and peers. Both survived.</p>
+        </div>
+
+        <div class="step reveal from-left" style="--sc:var(--p2)">
+          <div class="when">2023</div>
+          <h3>First tools, first stage</h3>
+          <p>Spoke on digital vulnerability at <em>“The Value of a Like”</em>, a workshop held with
+          the National Association of Magistrates and the Court of Cassation. The same year,
+          VisuaLex was born as a humble Colab notebook.</p>
+        </div>
+
+        <div class="step reveal from-left" style="--sc:var(--p3)">
+          <div class="when">2024</div>
+          <h3>From notebook to API</h3>
+          <p>VisuaLex became a real platform — async API, React frontend, structured views over
+          Normattiva, EUR-Lex and Brocardi. Open source from day one.</p>
+        </div>
+
+        <div class="step reveal from-left" style="--sc:var(--p3)">
+          <div class="when">2025 · SAPG Legal, Rome</div>
+          <h3>Into practice</h3>
+          <p>Legal intern at <em>SAPG Legal</em>: GDPR drafting and compliance, legal work for AI
+          companies, publishing for the firm's <em>Osservatorio Dati &amp; Imprese</em>. Meanwhile,
+          nights and weekends produced MERL-T, legal NER experiments and knowledge-graph pipelines.</p>
+        </div>
+
+        <div class="step reveal from-left" style="--sc:var(--p4)">
+          <div class="when">2026</div>
+          <h3>Degree, thesis, flagship</h3>
+          <p>Law degree from LUISS, 110/110. Thesis: <em>Geometria Iuris</em> — measuring legal
+          meaning in embedding spaces. And mcp-legal-it shipped: 200+ verified legal tools for
+          Claude, now in daily use in real legal practice. Currently a trainee lawyer
+          (<i>praticante avvocato</i>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="wrap">
+      <h2 class="reveal"><span class="mask">Research</span></h2>
+      <div class="note reveal" data-tilt>
+        <span class="bigsign" aria-hidden="true">§</span>
+        <strong class="t">Geometria Iuris — measuring legal meaning in embedding spaces.</strong><br><br>
+        My master's thesis (LUISS, Methodology of Legal Science) asks whether legal meaning is
+        measurable — treating embedding spaces as the measuring instrument and testing what they
+        can, and cannot, register about legal language across legal traditions. The experimental
+        artefacts are frozen and hash-verified: 50 SHA-256 checksums stand between the results
+        and wishful thinking.
+        <div class="links">
+          <a href="https://capazme.github.io/Geometria-Iuris/">Results dashboard →</a>
+          <a href="https://github.com/capazme/Geometria-Iuris">Code &amp; artefacts →</a>
+          <a href="https://orcid.org/0009-0001-4366-2632">ORCID →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <h2 class="reveal"><span class="mask">About</span></h2>
+      <p class="reveal">I'm a lawyer who writes production code — not a developer who read a law
+      book once. I taught myself engineering because legal work kept running into problems only
+      code could solve properly: sources that need verifying, calculations that need repeating
+      exactly, texts that need structure.</p>
+      <p class="reveal">That makes me bilingual in a useful way: I can read a <i>sentenza</i> and a
+      stack trace, draft a GDPR notice and the API that generates it. At <strong>SAPG Legal</strong>
+      I work on data protection and compliance for technology and AI companies; on my own time
+      I build the open-source tools I wish existed when the workday started.</p>
+      <p class="reveal">I build for the Italian legal system first — which is why my projects'
+      documentation is often in Italian. The engineering underneath speaks English, and so do I.</p>
+      <div class="langs reveal">
+        <span>Italian — native</span>
+        <span>English — C1 (CAE)</span>
+        <span>French — B2 (DELF · EsaBac)</span>
+        <span>Python — advanced</span>
+        <span>TypeScript — conversational</span>
+      </div>
+      <p class="fact-line reveal">Rome, Italy · working with law firms and legal-tech teams across
+      Italy and Europe · code on <a href="https://github.com/capazme">GitHub</a></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap contact">
+      <h2 class="reveal"><span class="mask">Contact</span></h2>
+      <p class="reveal">Building something at the intersection of law and software — or trying to
+      make an Italian legal workflow less painful? The fastest way to reach me is email, in
+      Italian or English.</p>
+      <div class="hero-links reveal">
+        <a class="btn solid" data-magnet href="mailto:g.puzio@sapglegal.com">g.puzio@sapglegal.com</a>
+      </div>
+      <div class="alt-links reveal">
+        <a href="https://github.com/capazme">GitHub</a>
+        <a href="https://www.linkedin.com/in/guglielmo-puzio">LinkedIn</a>
+        <a href="https://orcid.org/0009-0001-4366-2632">ORCID</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = matchMedia('(pointer: fine)').matches;
+
+  /* preloader */
+  var intro = document.getElementById('intro');
+  var pctN = document.getElementById('pctN');
+  if (intro && !reduced) {
+    var p0 = null;
+    (function count(t) {
+      if (!p0) p0 = t;
+      var p = Math.min((t - p0) / 950, 1);
+      pctN.textContent = Math.round(100 * (1 - Math.pow(1 - p, 2.4)));
+      if (p < 1) requestAnimationFrame(count);
+      else setTimeout(function () { intro.classList.add('done'); }, 120);
+    })(performance.now());
+  }
+
+  /* custom cursor */
+  if (finePointer && !reduced) {
+    document.body.classList.add('cc');
+    var cur = document.getElementById('cur'), ring = document.getElementById('curRing');
+    var mx = -100, my = -100, rx = -100, ry = -100;
+    addEventListener('mousemove', function (e) { mx = e.clientX; my = e.clientY; }, { passive: true });
+    (function curLoop() {
+      rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
+      cur.style.transform = 'translate(' + mx + 'px,' + my + 'px)';
+      ring.style.transform = 'translate(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px)';
+      requestAnimationFrame(curLoop);
+    })();
+    document.addEventListener('mouseover', function (e) {
+      document.body.classList.toggle('cur-hover', !!e.target.closest('a, button, [data-tilt], .langs span, .marquee'));
+    }, { passive: true });
+  }
+
+  /* header + progress fallback */
+  var hd = document.getElementById('hd');
+  var bar = document.getElementById('progress');
+  var cssScroll = CSS.supports && CSS.supports('animation-timeline: scroll()');
+  var lastY = 0;
+  addEventListener('scroll', function () {
+    var y = scrollY;
+    hd.classList.toggle('scrolled', y > 24);
+    hd.classList.toggle('hidden', y > 420 && y > lastY);
+    lastY = y;
+    if (!cssScroll) { var max = document.documentElement.scrollHeight - innerHeight; bar.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')'; }
+  }, { passive: true });
+
+  /* reveals */
+  var revealed = document.querySelectorAll('.reveal');
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    revealed.forEach(function (el) { io.observe(el); });
+  } else { revealed.forEach(function (el) { el.classList.add('in'); }); }
+
+  /* counters */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        cio.unobserve(e.target);
+        var el = e.target, target = +el.dataset.count, t0 = null;
+        function tick(t) { if (!t0) t0 = t; var p = Math.min((t - t0) / 1200, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); }
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+  }
+
+  /* timeline */
+  var tl = document.querySelector('.timeline');
+  var pline = document.querySelector('.timeline .progressline');
+  if (tl && pline && !reduced) {
+    var onTl = function () { var r = tl.getBoundingClientRect(); var p = Math.min(Math.max((innerHeight * 0.78 - r.top) / r.height, 0), 1); pline.style.transform = 'scaleY(' + p + ')'; };
+    addEventListener('scroll', onTl, { passive: true }); onTl();
+  }
+
+  /* scramble */
+  var sc = document.getElementById('scramble');
+  if (sc && !reduced) {
+    var FINAL = 'computable', GLYPHS = '§¶†‡°λπμ∂∫≠≈';
+    setTimeout(function () {
+      var step = 0, iv = setInterval(function () {
+        var out = FINAL.slice(0, step);
+        for (var i = step; i < FINAL.length; i++) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        sc.textContent = out;
+        if (++step > FINAL.length) { sc.textContent = FINAL; clearInterval(iv); }
+      }, 50);
+    }, 2100);
+  }
+
+  /* tilt + glare */
+  if (finePointer && !reduced) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      var raf = null;
+      card.addEventListener('mousemove', function (e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function () {
+          raf = null;
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+          card.style.transform = 'perspective(950px) rotateX(' + ((py - .5) * -4).toFixed(2) + 'deg) rotateY(' + ((px - .5) * 5).toFixed(2) + 'deg)';
+          card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+          card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+        });
+      });
+      card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+    });
+  }
+
+  /* magnetic buttons */
+  if (finePointer && !reduced) {
+    document.querySelectorAll('[data-magnet]').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = 'translate(' + (dx * .14).toFixed(1) + 'px,' + (dy * .3).toFixed(1) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+    });
+  }
+
+  /* hero parallax */
+  var heroWrap = document.getElementById('heroWrap');
+  if (heroWrap && finePointer && !reduced) {
+    addEventListener('mousemove', function (e) {
+      if (scrollY > innerHeight) return;
+      var dx = (e.clientX / innerWidth - .5), dy = (e.clientY / innerHeight - .5);
+      heroWrap.style.transform = 'translate3d(' + (dx * -8).toFixed(1) + 'px,' + (dy * -6).toFixed(1) + 'px,0)';
+    }, { passive: true });
+  }
+
+  /* 3D scene: draggable legal knowledge-graph sphere */
+  var cv = document.getElementById('scene3d');
+  if (cv && !reduced) {
+    var ctx = cv.getContext('2d');
+    var dpr = Math.min(devicePixelRatio || 1, 2);
+    var W, H, CX, CY, R, damp = 1, pts = [], edges = [], raf = null;
+    var rotY = 0, rotX = -0.18, tRX = -0.18, tRY = 0;
+    var rotVel = 0, dragging = false, lastPX = 0;
+    var scrollT = 0;
+    var FOV = 900;
+    var LABELS = ['art. 12 preleggi', 'art. 2043 c.c.', 'GDPR', 'Cass., SS.UU.', 'EUR-Lex',
+                  'Normattiva', 'MCP', 'embeddings', 'art. 1322 c.c.', 'Italgiure',
+                  'DPIA', 'knowledge graph', 'RLCF', 'Brocardi'];
+
+    function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    var col = cssVar('--net'), gold = cssVar('--gold-rgb'), viol = cssVar('--p3');
+    var mq = matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', function () {
+      setTimeout(function () { col = cssVar('--net'); gold = cssVar('--gold-rgb'); viol = cssVar('--p3'); }, 60);
+    });
+
+    function build() {
+      W = cv.width = cv.offsetWidth * dpr;
+      H = cv.height = cv.offsetHeight * dpr;
+      CX = W * 0.66; CY = H * 0.46;
+      R = Math.min(W, H) * 0.34;
+      var N = W < 700 * dpr ? 90 : 150;
+      damp = W < 700 * dpr ? 0.72 : 1;
+      pts = [];
+      var GA = Math.PI * (3 - Math.sqrt(5)), li = 0;
+      for (var i = 0; i < N; i++) {
+        var yy = 1 - (i / (N - 1)) * 2;
+        var rr = Math.sqrt(1 - yy * yy);
+        var th = GA * i;
+        var noise = 0.82 + Math.random() * 0.36;
+        var isG = i % 11 === 0;
+        pts.push({ x: Math.cos(th) * rr * noise, y: yy * noise, z: Math.sin(th) * rr * noise,
+          g: isG, v: (!isG && i % 7 === 0), label: isG ? LABELS[li++ % LABELS.length] : null });
+      }
+      edges = [];
+      for (var a = 0; a < N; a++) {
+        var ds = [];
+        for (var b = 0; b < N; b++) {
+          if (a === b) continue;
+          var dx = pts[a].x - pts[b].x, dy = pts[a].y - pts[b].y, dz = pts[a].z - pts[b].z;
+          ds.push([dx * dx + dy * dy + dz * dz, b]);
+        }
+        ds.sort(function (u, v) { return u[0] - v[0]; });
+        for (var k = 0; k < 3; k++) {
+          var pair = a < ds[k][1] ? a + '-' + ds[k][1] : ds[k][1] + '-' + a;
+          if (edges.indexOf(pair) < 0) edges.push(pair);
+        }
+      }
+      edges = edges.map(function (p) { var s = p.split('-'); return [+s[0], +s[1]]; });
+    }
+
+    var proj = [];
+    function frame() {
+      rotY += 0.0022 + scrollT * 0.004 + rotVel;
+      rotVel *= 0.95;
+      rotX += (tRX - rotX) * 0.05;
+      var swell = 1 + scrollT * 1.7;
+      var fade = Math.max(1 - scrollT * 1.25, 0) * damp;
+      ctx.clearRect(0, 0, W, H);
+      if (fade <= 0.02) { raf = requestAnimationFrame(frame); return; }
+      var cy = Math.cos(rotY), sy = Math.sin(rotY);
+      var cx = Math.cos(rotX + tRY * 0.3), sx = Math.sin(rotX + tRY * 0.3);
+      var i, p, ux, uy, uz, sc2, s;
+      proj.length = 0;
+      for (i = 0; i < pts.length; i++) {
+        p = pts[i];
+        ux = p.x * cy + p.z * sy;
+        uz = -p.x * sy + p.z * cy;
+        uy = p.y * cx - uz * sx;
+        uz = p.y * sx + uz * cx;
+        sc2 = R * swell;
+        s = FOV / (FOV + uz * sc2 + R * 1.2);
+        proj.push({ x: CX + ux * sc2 * s, y: CY + uy * sc2 * s, s: s });
+      }
+      var e, A, B, al;
+      ctx.lineWidth = 1;
+      for (i = 0; i < edges.length; i++) {
+        e = edges[i]; A = proj[e[0]]; B = proj[e[1]];
+        al = ((A.s + B.s) / 2 - 0.48) * 0.62 * fade;
+        if (al <= 0.008) continue;
+        ctx.strokeStyle = 'rgba(' + col + ',' + al.toFixed(3) + ')';
+        ctx.beginPath(); ctx.moveTo(A.x, A.y); ctx.lineTo(B.x, B.y); ctx.stroke();
+      }
+      var near = [];
+      for (i = 0; i < pts.length; i++) {
+        A = proj[i];
+        al = (A.s - 0.42) * 1.25 * fade;
+        if (al <= 0.01) continue;
+        if (pts[i].g) {
+          ctx.fillStyle = 'rgba(' + gold + ',' + Math.min(al * 1.1, .95).toFixed(3) + ')';
+          ctx.font = (12 * A.s * dpr | 0) + 'px Georgia, serif';
+          ctx.fillText('§', A.x - 4, A.y + 4);
+          near.push([A.s, A, pts[i].label, al]);
+        } else {
+          ctx.fillStyle = 'rgba(' + (pts[i].v ? viol : col) + ',' + Math.min(al, .8).toFixed(3) + ')';
+          ctx.beginPath(); ctx.arc(A.x, A.y, Math.max(1.7 * A.s * dpr, .4), 0, 7); ctx.fill();
+        }
+      }
+      near.sort(function (u, v) { return v[0] - u[0]; });
+      ctx.font = (9.5 * dpr | 0) + 'px -apple-system, "Segoe UI", sans-serif';
+      for (i = 0; i < Math.min(4, near.length); i++) {
+        A = near[i][1];
+        ctx.fillStyle = 'rgba(' + gold + ',' + Math.min(near[i][3] * .85, .75).toFixed(3) + ')';
+        ctx.fillText(near[i][2].toUpperCase(), A.x + 9 * dpr, A.y + 3 * dpr);
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    build();
+    addEventListener('resize', build);
+    addEventListener('scroll', function () { scrollT = Math.min(scrollY / innerHeight, 1.2); }, { passive: true });
+    if (finePointer) {
+      addEventListener('mousemove', function (e) {
+        if (!dragging) { tRY = (e.clientX / innerWidth - .5) * 0.5; tRX = -0.18 + (e.clientY / innerHeight - .5) * 0.36; }
+      }, { passive: true });
+    }
+    cv.addEventListener('pointerdown', function (e) { dragging = true; lastPX = e.clientX; document.body.classList.add('cur-drag'); cv.setPointerCapture(e.pointerId); });
+    cv.addEventListener('pointermove', function (e) { if (!dragging) return; rotVel += (e.clientX - lastPX) * 0.00028; lastPX = e.clientX; });
+    ['pointerup', 'pointercancel'].forEach(function (ev) { cv.addEventListener(ev, function () { dragging = false; document.body.classList.remove('cur-drag'); }); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { cancelAnimationFrame(raf); raf = null; } else if (!raf) frame();
+    });
+    frame();
+  }
+})();
+</script>
+
+</body>
+</html>
