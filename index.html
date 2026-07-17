@@ -244,8 +244,8 @@
 
   /* ---------- stats ---------- */
   .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); perspective: 900px; }
-  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding-top: 2.2rem; padding-bottom: 2.2rem; text-align: center; }
-  @media (max-width: 640px) { .stats-inner { grid-template-columns: repeat(2, 1fr); row-gap: 1.9rem; } }
+  .stats-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding-top: 2.2rem; padding-bottom: 2.2rem; text-align: center; }
+  @media (max-width: 560px) { .stats-inner { gap: .5rem; } }
   .stat .n { font-family: "EB Garamond", Georgia, serif; font-size: 2rem; color: rgb(var(--h)); font-variant-numeric: tabular-nums; }
   .stat .n .suffix { color: var(--gold); }
   .stat .l { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: .25rem; }
@@ -431,9 +431,8 @@
   <div class="stats">
     <div class="wrap stats-inner">
       <div class="stat reveal" style="--h:var(--p1)"><div class="n"><span data-count="200">200</span><span class="suffix">+</span></div><div class="l">legal tools shipped</div></div>
-      <div class="stat reveal" style="--h:var(--p2); --d:.09s"><div class="n"><span data-count="7">7</span><span class="suffix">+</span></div><div class="l">verified legal sources</div></div>
-      <div class="stat reveal" style="--h:var(--p3); --d:.18s"><div class="n"><span data-count="1">1</span></div><div class="l">live platform</div></div>
-      <div class="stat reveal" style="--h:var(--p4); --d:.27s"><div class="n"><span data-count="3">3</span></div><div class="l">working languages</div></div>
+      <div class="stat reveal" style="--h:var(--p3); --d:.09s"><div class="n"><span data-count="1">1</span></div><div class="l">live platform</div></div>
+      <div class="stat reveal" style="--h:var(--p4); --d:.18s"><div class="n"><span data-count="3">3</span></div><div class="l">working languages</div></div>
     </div>
   </div>
 
