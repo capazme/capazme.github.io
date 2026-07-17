@@ -249,6 +249,24 @@
   .stat .n { font-family: "EB Garamond", Georgia, serif; font-size: 2rem; color: rgb(var(--h)); font-variant-numeric: tabular-nums; }
   .stat .n .suffix { color: var(--gold); }
   .stat .l { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: .25rem; }
+  .stat { position: relative; cursor: pointer; }
+  body.cc .stat { cursor: none; }
+  .stat-detail { position: absolute; top: 100%; z-index: 6; width: max-content; max-width: min(320px, 88vw); padding-top: .7rem; text-align: left; opacity: 0; visibility: hidden; transition: opacity .22s ease, visibility .22s; }
+  .stat:nth-child(1) .stat-detail { left: 0; }
+  .stat:nth-child(2) .stat-detail { left: 50%; transform: translateX(-50%); }
+  .stat:nth-child(3) .stat-detail { right: 0; }
+  .stat:hover, .stat:focus-within, .stat.open { z-index: 7; }
+  .stat:hover .stat-detail, .stat:focus-within .stat-detail, .stat.open .stat-detail { opacity: 1; visibility: visible; }
+  .stat:focus { outline: none; }
+  .detail-card { background: var(--card); border: 1px solid var(--line); border-top: 2px solid rgb(var(--h)); border-radius: 6px; box-shadow: 0 18px 44px rgba(0,0,0,.3); padding: .85rem 1rem .95rem; transform: translateY(6px); transition: transform .22s ease; }
+  .stat:hover .detail-card, .stat:focus-within .detail-card, .stat.open .detail-card { transform: none; }
+  .detail-card h4 { font-family: "EB Garamond", Georgia, serif; font-weight: 400; font-size: 1.05rem; color: var(--ink); margin-bottom: .25rem; }
+  .detail-card p { font-size: .82rem; color: var(--muted); line-height: 1.5; margin: 0; }
+  .detail-card .cats { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .55rem; }
+  .detail-card .cats span { font-size: .72rem; background: rgba(var(--h), .12); color: rgb(var(--h)); padding: .1rem .45rem; border-radius: 3px; white-space: nowrap; }
+  .detail-card a { display: inline-block; margin-top: .6rem; font-size: .8rem; color: rgb(var(--h)); }
+  .detail-card .lbl2 { font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: .55rem; }
+  .detail-card .row { font-size: .84rem; color: var(--ink); margin-top: .2rem; }
 
   /* ---------- marquee ---------- */
   .marquee { overflow: hidden; border-bottom: 1px solid var(--line); padding: 1.6rem 0; user-select: none; }
@@ -430,9 +448,36 @@
 
   <div class="stats">
     <div class="wrap stats-inner">
-      <div class="stat reveal" style="--h:var(--p1)"><div class="n"><span data-count="200">200</span><span class="suffix">+</span></div><div class="l">legal tools shipped</div></div>
-      <div class="stat reveal" style="--h:var(--p3); --d:.09s"><div class="n"><span data-count="1">1</span></div><div class="l">live platform</div></div>
-      <div class="stat reveal" style="--h:var(--p4); --d:.18s"><div class="n"><span data-count="3">3</span></div><div class="l">working languages</div></div>
+      <div class="stat reveal" style="--h:var(--p1)" tabindex="0">
+        <div class="n"><span data-count="200">200</span><span class="suffix">+</span></div>
+        <div class="l">legal tools shipped</div>
+        <div class="stat-detail"><div class="detail-card">
+          <h4>214 verified tools</h4>
+          <p>The everyday work of practice, computed and grounded in real sources.</p>
+          <div class="cats"><span>Damages &amp; interest</span><span>Procedural deadlines</span><span>Court filings</span><span>Enforcement</span><span>Lawyer &amp; expert fees</span><span>Tax &amp; payroll</span><span>Property &amp; succession</span><span>Case law search</span><span>Legislation</span><span>GDPR compliance</span><span>Utilities</span></div>
+          <a href="https://github.com/capazme/mcp-legal-it">See the full list on GitHub →</a>
+        </div></div>
+      </div>
+      <div class="stat reveal" style="--h:var(--p3); --d:.09s" tabindex="0">
+        <div class="n"><span data-count="1">1</span></div>
+        <div class="l">live platform</div>
+        <div class="stat-detail"><div class="detail-card">
+          <h4>VisuaLex</h4>
+          <p>A research workbench for Italian and EU legal sources. Live in private beta, access on request.</p>
+          <a href="https://www.visualex.org">visualex.org →</a>
+        </div></div>
+      </div>
+      <div class="stat reveal" style="--h:var(--p4); --d:.18s" tabindex="0">
+        <div class="n"><span data-count="3">3</span></div>
+        <div class="l">working languages</div>
+        <div class="stat-detail"><div class="detail-card">
+          <h4>Languages</h4>
+          <div class="lbl2">Spoken</div>
+          <div class="row">Italian (native) · English (C1) · French (B2)</div>
+          <div class="lbl2">Code</div>
+          <div class="row">Python · TypeScript · SQL · Bash · HTML / CSS</div>
+        </div></div>
+      </div>
     </div>
   </div>
 
@@ -779,9 +824,22 @@
       requestAnimationFrame(curLoop);
     })();
     document.addEventListener('mouseover', function (e) {
-      document.body.classList.toggle('cur-hover', !!e.target.closest('a, button, [data-tilt], .langs span, .marquee'));
+      document.body.classList.toggle('cur-hover', !!e.target.closest('a, button, [data-tilt], .langs span, .marquee, .stat'));
     }, { passive: true });
   }
+
+  /* stat detail: hover on desktop (CSS), tap to toggle on touch */
+  document.querySelectorAll('.stat').forEach(function (st) {
+    st.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      var wasOpen = st.classList.contains('open');
+      document.querySelectorAll('.stat.open').forEach(function (o) { o.classList.remove('open'); });
+      if (!wasOpen) st.classList.add('open');
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.stat')) document.querySelectorAll('.stat.open').forEach(function (o) { o.classList.remove('open'); });
+  });
 
   /* header + progress fallback */
   var hd = document.getElementById('hd');
