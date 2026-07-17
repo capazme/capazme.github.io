@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Guglielmo Puzio — Legal Engineer</title>
-<meta name="description" content="Lawyer and engineer in Rome. I build open-source tools that make Italian law computable: MCP tooling for Claude, legal NLP, knowledge graphs.">
-<meta property="og:title" content="Guglielmo Puzio — Legal Engineer">
+<title>Guglielmo Puzio · Legal Engineer</title>
+<meta name="description" content="Lawyer and engineer in Rome. I build open source tools that make Italian law computable: MCP tooling for Claude, legal NLP, knowledge graphs.">
+<meta property="og:title" content="Guglielmo Puzio · Legal Engineer">
 <meta property="og:description" content="I build tools that make Italian law computable.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://capazme.github.io/">
@@ -409,13 +409,15 @@
         <span class="w" style="--i:6">law</span>
         <span class="w computable" style="--i:7"><span id="scramble">computable</span>.</span>
       </h1>
-      <p class="sub fx fx2">Lawyer by training, engineer by obsession. Law degree from
-      <strong>LUISS</strong> (Law &amp; Innovation), code forged at <strong>42 Roma</strong>,
-      now a trainee lawyer (<i>praticante avvocato</i>) at a Rome firm — shipping open-source
-      legal tools the whole way.</p>
+      <p class="sub fx fx2">Lawyer by training, engineer by stubbornness. A law degree from
+      <strong>LUISS</strong>, code learned the hard way at <strong>42 Roma</strong>. What holds it
+      together is a suspicion neither field says out loud: that law and computer science are close
+      relatives. Both write rules in a formal language, and both spend their lives arguing over what
+      those rules really mean. I work in the space where the two meet, for now as a trainee lawyer
+      (<i>praticante avvocato</i>) in Rome.</p>
       <div class="hero-links fx fx3">
         <a class="btn solid" data-magnet href="mailto:g.puzio@sapglegal.com">Email me</a>
-        <a class="btn" data-magnet href="https://github.com/capazme">GitHub — @capazme</a>
+        <a class="btn" data-magnet href="https://github.com/capazme">GitHub · @capazme</a>
         <a class="btn" data-magnet href="https://www.linkedin.com/in/guglielmo-puzio">LinkedIn</a>
       </div>
     </div>
@@ -427,7 +429,7 @@
     <div class="wrap stats-inner">
       <div class="stat reveal" style="--h:var(--p1)"><div class="n"><span data-count="200">200</span><span class="suffix">+</span></div><div class="l">legal tools shipped</div></div>
       <div class="stat reveal" style="--h:var(--p2); --d:.09s"><div class="n"><span data-count="7">7</span><span class="suffix">+</span></div><div class="l">verified legal sources</div></div>
-      <div class="stat reveal" style="--h:var(--p3); --d:.18s"><div class="n"><span data-count="16">16</span></div><div class="l">open-source repos</div></div>
+      <div class="stat reveal" style="--h:var(--p3); --d:.18s"><div class="n"><span data-count="16">16</span></div><div class="l">open source repos</div></div>
       <div class="stat reveal" style="--h:var(--p4); --d:.27s"><div class="n"><span data-count="3">3</span><span class="suffix">+py</span></div><div class="l">working languages</div></div>
     </div>
   </div>
@@ -446,8 +448,8 @@
   <section id="work">
     <div class="wrap">
       <h2 class="reveal"><span class="mask">Selected work</span></h2>
-      <p class="lede reveal">Every project starts from the same itch: a legal task that deserves
-      better tooling than copy-paste and blind trust.</p>
+      <p class="lede reveal">Every project starts from the same itch: a piece of legal work that
+      deserves better than copy and paste, and better than blind faith.</p>
 
       <article class="entry reveal" data-tilt style="--h:var(--p1)">
         <div class="cover">
@@ -480,13 +482,12 @@
           <div class="num">01</div>
           <div>
             <h3><a href="https://github.com/capazme/mcp-legal-it">mcp-legal-it</a></h3>
-            <p><strong>The problem:</strong> large language models are eloquent about the law and
-            frequently wrong about it. <strong>The tool:</strong> an MCP server that grounds Claude
-            in verified Italian sources — statutes from Normattiva, case law from Italgiure and
-            CeRDEF, EU law from EUR-Lex — plus 200+ deterministic tools for the work lawyers
-            actually bill hours for: interest and revaluation, fee schedules, procedural deadlines,
-            GDPR paperwork. Guardrail hooks verify that every cited norm is backed by a real
-            source lookup.</p>
+            <p>A language model speaks about Italian law fluently, and often wrongly. It has read
+            plenty about the law without ever reading the law itself. mcp-legal-it gives it the
+            sources to read (Normattiva, Italgiure, EUR-Lex) and asks it to quote rather than
+            recall, then takes over the mechanical work around them: interest, deadlines, fee
+            schedules, GDPR filings. The point is not to automate judgment. It is to clear the toil
+            away from it, so the interpreting stays where it belongs, with the jurist.</p>
             <div class="meta">
               <span class="tag">Python</span><span class="tag">MCP</span><span class="tag">Apache-2.0</span>
               <span>CI · versioned releases · 20 skills · 6 agents</span>
@@ -520,11 +521,12 @@
           <div class="num">02</div>
           <div>
             <h3><a href="https://github.com/capazme/VisuaLexAPI">VisuaLex</a></h3>
-            <p><strong>The problem:</strong> legal research means walls of unstructured text.
-            <strong>The tool:</strong> a research workbench for Italian and EU sources — an async
-            Python API over Normattiva, EUR-Lex and Brocardi with a React frontend that turns
-            statutes into structured, navigable views. Started as a Colab notebook in 2023;
-            now on its fourth architecture and live in private beta at
+            <p>Legal research still means scrolling walls of undifferentiated text and holding the
+            structure in your head. VisuaLex gives that structure back to the page: an async Python
+            engine over Normattiva, EUR-Lex and Brocardi feeds a React reading surface, so a source
+            arrives already articulated, ready to be read and argued with rather than merely
+            retrieved. It began as a Colab notebook in 2023, has been rebuilt three times since, and
+            now runs as a real platform in private beta at
             <a href="https://www.visualex.org">visualex.org</a>.</p>
             <div class="meta">
               <span class="tag">Python</span><span class="tag">TypeScript</span><span class="tag">React</span>
@@ -560,11 +562,13 @@
           <div class="num">03</div>
           <div>
             <h3><a href="https://github.com/capazme/ALIS_CORE">ALIS / MERL-T</a></h3>
-            <p><strong>The question:</strong> can interpretation itself be engineered? An experiment
-            in computational hermeneutics: the letter and the legislator's intent codified in
-            art. 12 of the Italian <i>preleggi</i>, the system around a norm, the case law that
-            applies it — each implemented as an expert in a multi-expert retrieval architecture,
-            aligned through community feedback (RLCF).</p>
+            <p>The question underneath everything I build, asked out loud: can interpretation be
+            modelled without being flattened? Article 12 of the <i>preleggi</i> names the canons an
+            Italian jurist reads a norm by: its words, its system, the intent behind it, the
+            precedent around it. ALIS gives each canon its own voice and lets them deliberate, with
+            community feedback to keep them honest. It is a research prototype, and openly an
+            incomplete one, because interpretation resists being made mechanical. That resistance is
+            exactly what makes it worth studying this way.</p>
             <div class="meta">
               <span class="tag">Python</span><span class="tag">FastAPI</span>
               <span>Research prototype</span>
@@ -591,10 +595,11 @@
           <div class="num">04</div>
           <div>
             <h3><a href="https://github.com/capazme/axeScraper">axeScraper</a></h3>
-            <p><strong>The problem:</strong> accessibility compliance is audited one page at a time.
-            <strong>The tool:</strong> a crawler and axe-core pipeline for large-scale web
-            accessibility audits — the tooling side of WCAG and European Accessibility Act
-            compliance. (This site respects <code>prefers-reduced-motion</code>. Naturally.)</p>
+            <p>Accessibility compliance is usually checked one page at a time, by hand, which does
+            not scale to a real website. axeScraper walks the whole site and runs axe-core across
+            every page, turning a manual audit into something you can actually finish: the working
+            end of WCAG and European Accessibility Act compliance. (And yes, this page honours
+            <code>prefers-reduced-motion</code>. It seemed only fair.)</p>
             <div class="meta">
               <span class="tag">Python</span><span class="tag">a11y</span>
             </div>
@@ -607,22 +612,23 @@
   <section id="journey">
     <div class="wrap">
       <h2 class="reveal"><span class="mask">The journey</span></h2>
-      <p class="lede reveal">From parsing Latin to parsing statutes — the long way round.</p>
+      <p class="lede reveal">From parsing Latin to parsing statutes, the long way round.</p>
       <div class="timeline">
         <div class="progressline" aria-hidden="true"></div>
 
         <div class="step reveal from-left" style="--sc:var(--p1)">
-          <div class="when">2016 – 2021 · Naples &amp; Lahti</div>
+          <div class="when">2016 to 2021 · Naples &amp; Lahti</div>
           <h3>Classics first</h3>
           <p><em>Liceo Classico Europeo</em> (EsaBac dual diploma) with an exchange year
-          in Finland. Latin, Greek, French, English: years of parsing dense texts in dead and
-          living languages — unknowingly, the best possible training for statutes and source code.</p>
+          in Finland. Latin, Greek, French, English: years spent parsing dense texts in dead and
+          living languages, which turned out to be the best possible training for statutes and
+          source code.</p>
         </div>
 
         <div class="step reveal from-left" style="--sc:var(--p2)">
           <div class="when">2021 · Rome</div>
           <h3>Law at LUISS, code at 42</h3>
-          <p>Enrolled in law at <em>LUISS Guido Carli</em>, Law &amp; Innovation track — and two
+          <p>Enrolled in law at <em>LUISS Guido Carli</em>, Law &amp; Innovation track, and two
           months later walked into the <em>42 Roma Luiss</em> piscine: no teachers, no lectures,
           just problems and peers. Both survived.</p>
         </div>
@@ -638,7 +644,7 @@
         <div class="step reveal from-left" style="--sc:var(--p3)">
           <div class="when">2024</div>
           <h3>From notebook to API</h3>
-          <p>VisuaLex became a real platform — async API, React frontend, structured views over
+          <p>VisuaLex became a real platform: async API, React frontend, structured views over
           Normattiva, EUR-Lex and Brocardi. Open source from day one.</p>
         </div>
 
@@ -647,13 +653,13 @@
           <h3>Into practice</h3>
           <p>Legal intern at <em>SAPG Legal</em>: GDPR drafting and compliance, legal work for AI
           companies, publishing for the firm's <em>Osservatorio Dati &amp; Imprese</em>. Meanwhile,
-          nights and weekends produced MERL-T, legal NER experiments and knowledge-graph pipelines.</p>
+          nights and weekends produced MERL-T, legal NER experiments and knowledge graph pipelines.</p>
         </div>
 
         <div class="step reveal from-left" style="--sc:var(--p4)">
           <div class="when">2026</div>
           <h3>Degree, thesis, flagship</h3>
-          <p>Law degree from LUISS, 110/110. Thesis: <em>Geometria Iuris</em> — measuring legal
+          <p>Law degree from LUISS, 110/110. Thesis: <em>Geometria Iuris</em>, measuring legal
           meaning in embedding spaces. And mcp-legal-it shipped: 200+ verified legal tools for
           Claude, now in daily use in real legal practice. Currently a trainee lawyer
           (<i>praticante avvocato</i>).</p>
@@ -667,12 +673,12 @@
       <h2 class="reveal"><span class="mask">Research</span></h2>
       <div class="note reveal" data-tilt>
         <span class="bigsign" aria-hidden="true">§</span>
-        <strong class="t">Geometria Iuris — measuring legal meaning in embedding spaces.</strong><br><br>
-        My master's thesis (LUISS, Methodology of Legal Science) asks whether legal meaning is
-        measurable — treating embedding spaces as the measuring instrument and testing what they
-        can, and cannot, register about legal language across legal traditions. The experimental
-        artefacts are frozen and hash-verified: 50 SHA-256 checksums stand between the results
-        and wishful thinking.
+        <strong class="t">Geometria Iuris: measuring legal meaning in embedding spaces.</strong><br><br>
+        My master's thesis (LUISS, Methodology of Legal Science) takes a question I could not leave
+        alone: is legal meaning something you can measure at all? It treats an embedding space as
+        the instrument and asks what such a space can register about legal language across
+        traditions, and, just as carefully, what it cannot. The artefacts are frozen and verified by
+        hash: fifty SHA-256 checksums stand between the results and wishful thinking.
         <div class="links">
           <a href="https://capazme.github.io/Geometria-Iuris/">Results dashboard →</a>
           <a href="https://github.com/capazme/Geometria-Iuris">Code &amp; artefacts →</a>
@@ -685,24 +691,31 @@
   <section id="about">
     <div class="wrap about">
       <h2 class="reveal"><span class="mask">About</span></h2>
-      <p class="reveal">I'm a lawyer who writes production code — not a developer who read a law
-      book once. I taught myself engineering because legal work kept running into problems only
-      code could solve properly: sources that need verifying, calculations that need repeating
-      exactly, texts that need structure.</p>
-      <p class="reveal">That makes me bilingual in a useful way: I can read a <i>sentenza</i> and a
-      stack trace, draft a GDPR notice and the API that generates it. At <strong>SAPG Legal</strong>
-      I work on data protection and compliance for technology and AI companies; on my own time
-      I build the open-source tools I wish existed when the workday started.</p>
-      <p class="reveal">I build for the Italian legal system first — which is why my projects'
-      documentation is often in Italian. The engineering underneath speaks English, and so do I.</p>
+      <p class="reveal">I am a lawyer who writes production code, not a technologist who picked up
+      some law along the way. I taught myself to build because practice kept raising problems only
+      software could handle honestly: sources that need checking against the original, calculations
+      that must come out the same every time, texts that need their structure made visible.</p>
+      <p class="reveal">I do not see law and software as a client and its tool. I see two disciplines
+      circling the same problems from opposite ends. A statute and a program are both texts written
+      to govern situations that have not arrived yet, and both break in the same interesting places:
+      ambiguity, the unforeseen case, the gap between what was written and what was meant. Law has
+      worked on those problems for centuries. Computer science is a younger craft, rediscovering
+      them under new names. What draws me is not making one serve the other. It is that the distance
+      between them is shrinking at all, and what becomes possible as it does.</p>
+      <p class="reveal">It leaves me bilingual in a useful way: I can read a <i>sentenza</i> and a
+      stack trace, draft a GDPR notice and write the API that generates it. At <strong>SAPG Legal</strong>
+      I work on data protection and compliance for technology and AI companies; on my own time I
+      build the tools I keep wishing already existed.</p>
+      <p class="reveal">I build for the Italian legal system first, which is why my projects speak
+      Italian in their documentation. The engineering underneath speaks English, and so do I.</p>
       <div class="langs reveal">
-        <span>Italian — native</span>
-        <span>English — C1 (CAE)</span>
-        <span>French — B2 (DELF · EsaBac)</span>
-        <span>Python — advanced</span>
-        <span>TypeScript — conversational</span>
+        <span>Italian (native)</span>
+        <span>English (C1, CAE)</span>
+        <span>French (B2, DELF, EsaBac)</span>
+        <span>Python (advanced)</span>
+        <span>TypeScript (conversational)</span>
       </div>
-      <p class="fact-line reveal">Rome, Italy · working with law firms and legal-tech teams across
+      <p class="fact-line reveal">Rome, Italy · working with law firms and legal tech teams across
       Italy and Europe · code on <a href="https://github.com/capazme">GitHub</a></p>
     </div>
   </section>
@@ -710,9 +723,9 @@
   <section id="contact">
     <div class="wrap contact">
       <h2 class="reveal"><span class="mask">Contact</span></h2>
-      <p class="reveal">Building something at the intersection of law and software — or trying to
-      make an Italian legal workflow less painful? The fastest way to reach me is email, in
-      Italian or English.</p>
+      <p class="reveal">If you are working somewhere between law and software, or you have an
+      Italian legal workflow that deserves better than it currently gets, I would genuinely like to
+      hear about it. Email is the fastest way to reach me, in Italian or English.</p>
       <div class="hero-links reveal">
         <a class="btn solid" data-magnet href="mailto:g.puzio@sapglegal.com">g.puzio@sapglegal.com</a>
       </div>
